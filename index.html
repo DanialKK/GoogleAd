@@ -7,6 +7,7 @@
     <title>امدادخودرو تهران | اعزام فوری ۳۰ دقیقه‌ای، پنچرگیری، باتری و یدک‌کش</title>
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
     <style>
         input::placeholder, textarea::placeholder {
@@ -36,25 +37,6 @@
 <div class="w-full bg-green-600 text-white text-center py-2 text-sm">
     🚗 خدمات فوری در ۳۰ دقیقه — پوشش کامل شهر تهران و حومه
 </div>
-
-<section class="w-full relative overflow-hidden bg-gray-100 py-4">
-    <div class="slider-container flex overflow-x-scroll snap-x snap-mandatory scroll-smooth" id="image-slider">
-        <div class="flex-shrink-0 w-full snap-center px-4">
-            <img src="img/slide-1.webp" alt="امداد خودرو در محل" class="w-full max-h-80 object-cover rounded-lg shadow-md mx-auto" loading="lazy">
-        </div>
-        <div class="flex-shrink-0 w-full snap-center px-4">
-            <img src="img/slide-2.webp" alt="پنچرگیری سیار" class="w-full max-h-80 object-cover rounded-lg shadow-md mx-auto" loading="lazy">
-        </div>
-        <div class="flex-shrink-0 w-full snap-center px-4">
-            <img src="img/slide-3.webp" alt="تعمیر باتری خودرو" class="w-full max-h-80 object-cover rounded-lg shadow-md mx-auto" loading="lazy">
-        </div>
-    </div>
-    <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-2">
-        <button class="slider-dot w-3 h-3 bg-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200" data-slide="0"></button>
-        <button class="slider-dot w-3 h-3 bg-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200" data-slide="1"></button>
-        <button class="slider-dot w-3 h-3 bg-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-200" data-slide="2"></button>
-    </div>
-</section>
 
 <section class="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
     <div class="order-2 lg:order-1">
@@ -105,6 +87,46 @@
 
     <div class="order-1 lg:order-2 flex items-center justify-center">
         <img src="svg/tow-truck.svg" alt="یدک کش امداد خودرو" class="w-full max-w-sm object-contain drop-shadow-xl"/>
+    </div>
+</section>
+
+<!-- <=== Slider ===> -->
+<section class="slider-section">
+    <div class="slider-container">
+        <div class="slider-wrapper" id="sliderWrapper">
+
+            <div class="slide active">
+                <img src="webp/1.webp" alt="امداد خودرو">
+                <div class="slide-caption">
+                    <h2>امداد خودرو در محل</h2>
+                    <p>۲۴ ساعته – سریع – مطمئن</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="webp/2.webp" alt="پنچرگیری سیار">
+                <div class="slide-caption">
+                    <h2>پنچرگیری سیار</h2>
+                    <p>در کمتر از ۱۵ دقیقه کنار شما</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="webp/3.webp" alt="تعویض باتری">
+                <div class="slide-caption">
+                    <h2>تعویض باتری فوری</h2>
+                    <p>باتری اصلی + گارانتی واقعی</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- فلش‌ها -->
+        <button class="prev-btn" id="prevBtn">❮</button>
+        <button class="next-btn" id="nextBtn">❯</button>
+
+        <!-- دات‌ها -->
+        <div class="dots-container" id="dotsContainer"></div>
     </div>
 </section>
 
@@ -189,75 +211,6 @@
         </div>
     </div>
 </section>
-<script>
-    const counters = document.querySelectorAll('.counter');
-    const speed = 40;
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const update = () => {
-                const target = +counter.getAttribute('data-target');
-                const value = +counter.innerText;
-                const increment = target / speed;
-                if (value < target) {
-                    counter.innerText = Math.ceil(value + increment);
-                    setTimeout(update, 30);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            update();
-        });
-    };
-    let started = false;
-    window.addEventListener('scroll', () => {
-        const section = counters[0]?.closest('section');
-        if (section) {
-            const top = section.getBoundingClientRect().top;
-            if (!started && top < window.innerHeight - 100) {
-                animateCounters();
-                started = true;
-            }
-        }
-    });
-
-    // Slider Script
-    const slider = document.getElementById('image-slider');
-    const dots = document.querySelectorAll('.slider-dot');
-    let currentSlide = 0;
-
-    function goToSlide(index) {
-        slider.scrollLeft = slider.children[0].clientWidth * index;
-        updateDots(index);
-        currentSlide = index;
-    }
-
-    function updateDots(index) {
-        dots.forEach((dot, i) => {
-            if (i === index) {
-                dot.classList.add('bg-green-600');
-                dot.classList.remove('bg-gray-300');
-            } else {
-                dot.classList.remove('bg-green-600');
-                dot.classList.add('bg-gray-300');
-            }
-        });
-    }
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            goToSlide(parseInt(dot.dataset.slide));
-        });
-    });
-
-    // Auto slide
-    setInterval(() => {
-        currentSlide = (currentSlide + 1) % slider.children.length;
-        goToSlide(currentSlide);
-    }, 5000); // Change slide every 5 seconds
-
-    // Initial dot setup
-    goToSlide(0);
-</script>
 
 <section class="max-w-5xl mx-auto px-4 mt-10">
     <h3 class="text-xl font-semibold mb-4">نظرات مشتریان</h3>
@@ -285,6 +238,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 5.5C2 15 9 22 18.5 22c1.2 0 2.3-.4 3.1-1.1.4-.4.7-.9.7-1.4 0-.6-.3-1.2-.8-1.7l-2.9-2.3c-.7-.6-1.7-.3-2.2.3l-1.2 1.5c-.2.2-.5.4-.8.4-4 .1-7.3-3.2-7.2-7.2 0-.3.1-.6.4-.8l1.5-1.2c.6-.5.9-1.5.3-2.2L6.2 2.9C5.8 2.3 5.2 2 4.6 2c-.5 0-1 .2-1.4.6C2.4 3.4 2 4.5 2 5.5z"/>
     </svg>
 </a>
-
+<script src="index.js"></script>
 </body>
 </html>
