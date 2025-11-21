@@ -25,7 +25,7 @@ body {
 
 .slide {
     min-width: 100%;
-    position: relative;
+    position: absolute;
 }
 
 .slide img {
