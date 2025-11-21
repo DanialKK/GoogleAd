@@ -81,11 +81,11 @@ body {
 }
 
 .prev-btn {
-    left: 20px;
+    right: 20px;
 }
 
 .next-btn {
-    right: 20px;
+    left: 20px;
 }
 
 .prev-btn:hover, .next-btn:hover {
