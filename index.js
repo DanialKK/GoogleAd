@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = document.querySelectorAll('.dot');
 
     function updateSlider() {
-        wrapper.style.transform = `translateX(${ -currentIndex * 100 }%)`;
+        wrapper.style.transform = `translateX(${currentIndex * 100}%)`;
 
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentIndex);
@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // سوایپ موبایل
     let startX = 0;
-    wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+    wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
     wrapper.addEventListener('touchend', e => {
         const diff = startX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) {
             diff > 0 ? nextSlide() : prevSlide();
         }
-    }, { passive: true });
+    }, {passive: true});
 
     // شروع اولیه
     updateSlider();
