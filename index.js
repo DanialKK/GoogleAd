@@ -64,3 +64,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // شروع اولیه
     updateSlider();
 });
+
+ // شمارنده خدمات
+const counters = document.querySelectorAll('.counter');
+const speed = 40;
+const animateCounters = () => {
+  counters.forEach(counter => {
+    const update = () => {
+      const target = +counter.getAttribute('data-target');
+      const value = +counter.innerText;
+      const increment = target / speed;
+      if (value < target) {
+        counter.innerText = Math.ceil(value + increment);
+        setTimeout(update, 30);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    update();
+  });
+};
+let started = false;
+window.addEventListener('scroll', () => {
+  const section = counters[0]?.closest('section');
+  if (section) {
+    const top = section.getBoundingClientRect().top;
+    if (!started && top < window.innerHeight - 100) {
+      animateCounters();
+      started = true;
+    }
+  }
+});
