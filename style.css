@@ -20,14 +20,7 @@ body {
     overflow: hidden;
     border-radius: 24px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    aspect-ratio: 16 / 9; /* نسبت عالی برای همه دستگاه‌ها */
-}
-
-@media (max-width: 768px) {
-    .slider-container {
-        aspect-ratio: 4 / 5; /* موبایل عمودی‌تر */
-        border-radius: 16px;
-    }
+    background: #000;
 }
 
 .slider-wrapper {
@@ -35,10 +28,13 @@ body {
     width: 100%;
     height: 100%;
     transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .slide {
     min-width: 100%;
+    width: 100%;
     flex-shrink: 0;
     position: relative;
     height: 100%;
@@ -49,49 +45,50 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
-/* کپشن ریسپانسیو و زیبا */
 .slide-caption {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10% 8%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
     color: white;
-    padding: 80px 40px 40px;
     text-align: center;
-    backdrop-filter: blur(4px);
+    z-index: 1;
 }
 
 .slide-caption h2 {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2rem, 7vw, 4.5rem);
     font-weight: 900;
-    margin-bottom: 12px;
-    line-height: 1.2;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .slide-caption p {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    margin-top: 12px;
     opacity: 0.95;
     font-weight: 500;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
-/* فلش‌ها — در موبایل مخفی میشن */
 .prev-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
     background: rgba(255, 255, 255, 0.25);
     color: white;
     border: none;
-    width: 64px;
-    height: 64px;
+    border-radius: 50%;
     font-size: 36px;
     font-weight: bold;
-    border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     backdrop-filter: blur(12px);
@@ -104,36 +101,40 @@ body {
     opacity: 1;
 }
 
-.prev-btn { right: 24px; }
-.next-btn { left: 24px; }
+.prev-btn {
+    right: 24px;
+}
+
+.next-btn {
+    left: 24px;
+}
 
 .prev-btn:hover, .next-btn:hover {
     background: white;
     color: #000;
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transform: translateY(-50%) scale(1.2);
 }
 
-/* موبایل: فلش‌ها کاملاً مخفی */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .prev-btn, .next-btn {
         display: none;
     }
 }
 
-/* دات‌ها — ریسپانسیو و شیک */
 .dots-container {
     position: absolute;
-    bottom: 24px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 12px;
-    z-index: 10;
-    padding: 12px 20px;
-    background: rgba(0, 0, 0, 0.3);
+    gap: 14px;
+    padding: 14px 28px;
+    background: rgba(0, 0, 0, 0.55);
     border-radius: 50px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 20;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .dot {
@@ -147,17 +148,55 @@ body {
 
 .dot.active {
     background: white;
-    transform: scale(1.4);
-    box-shadow: 0 0 12px rgba(255,255,255,0.8);
+    transform: scale(1.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 1024px) {
+    .slider-container {
+        aspect-ratio: 21 / 9;
+    }
+}
+
+@media (max-width: 1023px) and (min-width: 640px) {
+    .slider-container {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+@media (max-width: 639px) {
+    .slider-container {
+        aspect-ratio: 4 / 5;
+    }
+
+    .dots-container {
+        bottom: 16px;
+        padding: 12px 24px;
+        gap: 12px;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+    }
+
+    .dot.active {
+        transform: scale(1.6);
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.9);
+    }
 }
 
 @media (max-width: 480px) {
     .dots-container {
-        bottom: 16px;
-        padding: 8px 16px;
+        padding: 10px 20px;
     }
+
     .dot {
         width: 10px;
         height: 10px;
+    }
+
+    .slide-caption {
+        justify-content: flex-start;
     }
 }
