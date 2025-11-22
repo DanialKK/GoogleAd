@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', nextSlide);
 
     // اتوپلی
-    // let autoPlay = setInterval(nextSlide, 5000);
-    //
-    // const container = document.querySelector('.slider-container');
-    // container.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    // container.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 5000));
+    let autoPlay = setInterval(nextSlide, 5000);
+
+    const container = document.querySelector('.slider-container');
+    container.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    container.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 5000));
 
     // سوایپ موبایل
     let startX = 0;
@@ -65,33 +65,33 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSlider();
 });
 
- // شمارنده خدمات
+// شمارنده خدمات
 const counters = document.querySelectorAll('.counter');
 const speed = 40;
 const animateCounters = () => {
-  counters.forEach(counter => {
-    const update = () => {
-      const target = +counter.getAttribute('data-target');
-      const value = +counter.innerText;
-      const increment = target / speed;
-      if (value < target) {
-        counter.innerText = Math.ceil(value + increment);
-        setTimeout(update, 30);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    update();
-  });
+    counters.forEach(counter => {
+        const update = () => {
+            const target = +counter.getAttribute('data-target');
+            const value = +counter.innerText;
+            const increment = target / speed;
+            if (value < target) {
+                counter.innerText = Math.ceil(value + increment);
+                setTimeout(update, 30);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        update();
+    });
 };
 let started = false;
 window.addEventListener('scroll', () => {
-  const section = counters[0]?.closest('section');
-  if (section) {
-    const top = section.getBoundingClientRect().top;
-    if (!started && top < window.innerHeight - 100) {
-      animateCounters();
-      started = true;
+    const section = counters[0]?.closest('section');
+    if (section) {
+        const top = section.getBoundingClientRect().top;
+        if (!started && top < window.innerHeight - 100) {
+            animateCounters();
+            started = true;
+        }
     }
-  }
 });
