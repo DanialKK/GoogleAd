@@ -93,11 +93,10 @@ body {
     font-weight: bold;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
     z-index: 10;
     backdrop-filter: blur(12px);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: all 0.4s ease;
 }
 
 .slider-container:hover .prev-btn,
