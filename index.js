@@ -95,3 +95,37 @@ window.addEventListener('scroll', () => {
         }
     }
 });
+
+// همه لوگو ها
+const items = document.querySelectorAll('.brand-item');
+  
+// IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const idx = Number(el.dataset.index || 0);
+
+      const delayMs = idx * 120;
+
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+      const finalDelay = isMobile ? delayMs : (idx * 60);
+
+      el.style.transitionDelay = finalDelay + 'ms';
+
+      el.classList.remove('opacity-0', 'translate-y-5');
+      el.classList.add('opacity-100', 'translate-y-0');
+
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.25 });
+
+items.forEach(i => observer.observe(i));
+
+// نظرات
+document.getElementById("review-form").addEventListener("submit", function (e) {
+  e.preventDefault();  
+  alert("نظر شما با موفقیت ارسال شد!");
+});
