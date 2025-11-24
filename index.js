@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     const totalSlides = wrapper.children.length;
 
-    // ساخت دات‌ها
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
@@ -44,28 +43,32 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', prevSlide);
     nextBtn.addEventListener('click', nextSlide);
 
-    // اتوپلی
     let autoPlay = setInterval(nextSlide, 5000);
 
     const container = document.querySelector('.slider-container');
     container.addEventListener('mouseenter', () => clearInterval(autoPlay));
     container.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 5000));
 
-    // سوایپ موبایل
     let startX = 0;
-    wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
-    wrapper.addEventListener('touchend', e => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-            diff > 0 ? nextSlide() : prevSlide();
-        }
-    }, {passive: true});
 
-    // شروع اولیه
+    wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
+
+    wrapper.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        }
+    }, { passive: true });
+
     updateSlider();
 });
 
-// شمارنده خدمات
 const counters = document.querySelectorAll('.counter');
 const speed = 40;
 const animateCounters = () => {
@@ -84,6 +87,7 @@ const animateCounters = () => {
         update();
     });
 };
+
 let started = false;
 window.addEventListener('scroll', () => {
     const section = counters[0]?.closest('section');
@@ -96,36 +100,33 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// همه لوگو ها
 const items = document.querySelectorAll('.brand-item');
-  
-// IntersectionObserver
+
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const idx = Number(el.dataset.index || 0);
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const idx = Number(el.dataset.index || 0);
 
-      const delayMs = idx * 60;
+            const delayMs = idx * 60;
 
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+            const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-      const finalDelay = isMobile ? delayMs : (idx * 70);
+            const finalDelay = isMobile ? delayMs : (idx * 70);
 
-      el.style.transitionDelay = finalDelay + 'ms';
+            el.style.transitionDelay = finalDelay + 'ms';
 
-      el.classList.remove('opacity-0', 'translate-y-5');
-      el.classList.add('opacity-100', 'translate-y-0');
+            el.classList.remove('opacity-0', 'translate-y-5');
+            el.classList.add('opacity-100', 'translate-y-0');
 
-      observer.unobserve(el);
-    }
-  });
-}, { threshold: 0.25 });
+            observer.unobserve(el);
+        }
+    });
+}, {threshold: 0.25});
 
 items.forEach(i => observer.observe(i));
 
-// نظرات
 document.getElementById("review-form").addEventListener("submit", function (e) {
-  e.preventDefault();  
-  alert("نظر شما با موفقیت ارسال شد!");
+    e.preventDefault();
+    alert("نظر شما با موفقیت ارسال شد!");
 });
