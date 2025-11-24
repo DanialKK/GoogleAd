@@ -106,11 +106,11 @@ const observer = new IntersectionObserver((entries) => {
       const el = entry.target;
       const idx = Number(el.dataset.index || 0);
 
-      const delayMs = idx * 120;
+      const delayMs = idx * 60;
 
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-      const finalDelay = isMobile ? delayMs : (idx * 60);
+      const finalDelay = isMobile ? delayMs : (idx * 70);
 
       el.style.transitionDelay = finalDelay + 'ms';
 
