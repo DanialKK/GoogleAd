@@ -198,3 +198,9 @@ body {
         height: 10px;
     }
 }
+
+.brand-item {
+    width: 150px !important;
+    height: 150px !important;
+}
+
