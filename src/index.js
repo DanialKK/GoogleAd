@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const container = document.querySelector('.slider-container');
     container.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    container.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 5000));
+    container.addEventListener('mouseleave', () => {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(nextSlide, 5000);
+    });
 
     let startX = 0;
 
