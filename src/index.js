@@ -1,3 +1,5 @@
+import "./style.css"
+
 document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.getElementById('sliderWrapper');
     const prevBtn = document.getElementById('prevBtn');
