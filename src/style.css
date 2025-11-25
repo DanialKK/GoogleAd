@@ -182,6 +182,12 @@ body {
     }
 }
 
+@media (max-width: 640px) {
+    .slide-caption {
+        justify-content: flex-start;
+    }
+}
+
 @media (max-width: 480px) {
     .dots-container {
         padding: 10px 20px;
@@ -190,9 +196,5 @@ body {
     .dot {
         width: 10px;
         height: 10px;
-    }
-
-    .slide-caption {
-        justify-content: flex-start;
     }
 }
