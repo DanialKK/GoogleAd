@@ -29,18 +29,28 @@
     </style>
     <link rel="icon" type="image/svg+xml" href="/svg/icon.svg">
     <script type="module" src="/src/index.js"></script>
+
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TLN38F64');</script>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            const f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TLN38F64');
+    </script>
     <!-- End Google Tag Manager -->
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLN38F64"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLN38F64"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div class="w-full bg-green-600 text-white text-center py-2 text-sm">
     🚨 نگران نباشید در کنار شما هستیم — پوشش کامل شهر تهران
@@ -608,57 +618,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <section class="max-w-4xl mx-auto px-4 mt-10">
-  <h3 class="text-xl font-semibold mb-4">ثبت نظر</h3>
+    <h3 class="text-xl font-semibold mb-4">ثبت نظر</h3>
 
-  <form id="review-form" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <form id="review-form" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-      <!-- نام -->
-      <div class="md:col-span-1">
-          <input
-              type="text"
-              name="name"
-              placeholder="نام شما"
-              required
-              class="w-full p-2 border rounded text-sm"
-          />
-      </div>
+        <!-- نام -->
+        <div class="md:col-span-1">
+            <input
+                    type="text"
+                    name="name"
+                    placeholder="نام شما"
+                    required
+                    class="w-full p-2 border rounded text-sm"
+            />
+        </div>
 
-      <!-- امتیاز -->
-      <div class="md:col-span-1">
-          <select
-              name="rate"
-              required
-              class="w-full p-2 border rounded text-sm"
-          >
-              <option value="">امتیاز</option>
-              <option>⭐⭐⭐⭐⭐</option>
-              <option>⭐⭐⭐⭐</option>
-              <option>⭐⭐⭐</option>
-              <option>⭐⭐</option>
-              <option>⭐</option>
-          </select>
-      </div>
+        <!-- امتیاز -->
+        <div class="md:col-span-1">
+            <select
+                    name="rate"
+                    required
+                    class="w-full p-2 border rounded text-sm"
+            >
+                <option value="">امتیاز</option>
+                <option>⭐⭐⭐⭐⭐</option>
+                <option>⭐⭐⭐⭐</option>
+                <option>⭐⭐⭐</option>
+                <option>⭐⭐</option>
+                <option>⭐</option>
+            </select>
+        </div>
 
-      <!-- متن نظر -->
-      <div class="md:col-span-3">
+        <!-- متن نظر -->
+        <div class="md:col-span-3">
           <textarea
-              name="comment"
-              placeholder="متن نظر"
-              required
-              class="w-full p-2 border rounded text-sm h-28"
+                  name="comment"
+                  placeholder="متن نظر"
+                  required
+                  class="w-full p-2 border rounded text-sm h-28"
           ></textarea>
-      </div>
-      
-      <!-- دکمه -->
-      <div class="md:col-span-1">
-        <button
-            type="submit"
-            class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-            ارسال
-        </button>
-    </div>
-  </form>
+        </div>
+
+        <!-- دکمه -->
+        <div class="md:col-span-1">
+            <button
+                    type="submit"
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+            >
+                ارسال
+            </button>
+        </div>
+    </form>
 </section>
 
 
