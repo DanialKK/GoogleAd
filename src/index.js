@@ -130,8 +130,3 @@ const observer = new IntersectionObserver((entries) => {
 }, {threshold: 0.25});
 
 items.forEach(i => observer.observe(i));
-
-document.getElementById("review-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    alert("نظر شما با موفقیت ارسال شد!");
-});
